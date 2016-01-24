@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CureViewDlg" widgetVar="CureViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{projekt.ViewCureTitle}">
+            <h:form id="CureViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cureController.selected != null}">
+                        <h:outputText value="#{projekt.ViewCureLabel_id}"/>
+                        <h:outputText value="#{cureController.selected.id}" title="#{projekt.ViewCureTitle_id}"/>
+                        <h:outputText value="#{projekt.ViewCureLabel_curename}"/>
+                        <h:outputText value="#{cureController.selected.curename}" title="#{projekt.ViewCureTitle_curename}"/>
+                        <h:outputText value="#{projekt.ViewCureLabel_description}"/>
+                        <h:outputText value="#{cureController.selected.description}" title="#{projekt.ViewCureTitle_description}"/>
+                        <h:outputText value="#{projekt.ViewCureLabel_idPerson}"/>
+                        <h:outputText value="#{cureController.selected.idPerson}" title="#{projekt.ViewCureTitle_idPerson}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{projekt.Close}" onclick="CureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
