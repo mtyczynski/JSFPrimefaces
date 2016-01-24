@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CureEditDlg" widgetVar="CureEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{projekt.EditCureTitle}">
+            <h:form id="CureEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cureController.selected != null}">
+                        <p:outputLabel value="#{projekt.EditCureLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cureController.selected.id}" title="#{projekt.EditCureTitle_id}" required="true" requiredMessage="#{projekt.EditCureRequiredMessage_id}"/>
+                        <p:outputLabel value="#{projekt.EditCureLabel_curename}" for="curename" />
+                        <p:inputText id="curename" value="#{cureController.selected.curename}" title="#{projekt.EditCureTitle_curename}" required="true" requiredMessage="#{projekt.EditCureRequiredMessage_curename}"/>
+                        <p:outputLabel value="#{projekt.EditCureLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{cureController.selected.description}" title="#{projekt.EditCureTitle_description}" />
+                        <p:outputLabel value="#{projekt.EditCureLabel_idPerson}" for="idPerson" />
+                        <p:selectOneMenu id="idPerson" value="#{cureController.selected.idPerson}" required="true" requiredMessage="#{projekt.EditCureRequiredMessage_idPerson}">
+                            <f:selectItem itemLabel="#{projekt.SelectOneMessage}"/>
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="idPersonItem"
+                                           itemValue="#{idPersonItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cureController.update}" value="#{projekt.Save}" update="display,:CureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CureEditDialog');"/>
+                    <p:commandButton value="#{projekt.Cancel}" onclick="CureEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
